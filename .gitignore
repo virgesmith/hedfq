@@ -1,0 +1,9 @@
+.vscode
+.venv*
+
+*.ctx
+*.pk
+
+# pyfhel tutorial scripts
+tutorial*.py
+*encrypted.csv
