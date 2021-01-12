@@ -2,7 +2,7 @@
 
 Homomorphic encryption permits mathematical operations to be executed directly on encrypted data, yielding an encrypted result that, when decrypted, is the same as you would get on the unencrypted input.
 
-This means that, for example, you can securely store encrypted data on a server and perform queries on it without ever having to worry about server-side encryption keys being compromised - they simply aren't there. The recipient of the data
+This means that, for example, you can securely store encrypted data on a server and perform queries on it without ever having to worry about server-side encryption keys being compromised - they simply aren't there. The recipient of the data must decrypt the result.
 
 ## Simple test
 
