@@ -120,5 +120,8 @@ check encrypted data no longer on server:
 
 ## Resources
 
-https://blog.openmined.org/build-an-homomorphic-encryption-scclient_heme-from-scratch-with-python/
+https://en.wikipedia.org/wiki/Homomorphic_encryption
 
+https://pyfhel.readthedocs.io/en/latest/
+
+https://blog.openmined.org/build-an-homomorphic-encryption-scclient_heme-from-scratch-with-python/
