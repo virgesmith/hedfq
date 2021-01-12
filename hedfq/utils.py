@@ -4,24 +4,29 @@ from Pyfhel import Pyfhel, PyCtxt
 
 ENCODING='utf-8' #'ISO-8859-1' "cp1252" #'latin-1'
 
-def encrypt_serialise(he, df):
-
+def encrypt(he, df_in):
+  df = df_in.copy()
   for y in df.columns:
     df[y] = df[y].apply(he.encryptFrac)
+  return df
 
-  # print("encrypted, unmodified")
-  # print(df.head())
+def decrypt(he, df_in):
+  df = df_in.copy()
+  for y in df.columns:
+    df[y] = df[y].apply(he.decryptFrac)
+  return df
 
+def serialise(df_in):
+  df = df_in.copy()
   for y in df.columns:
     # base64 encoded
     df[y] = df[y].apply(lambda e: b64encode(e.to_bytes()).decode(ENCODING)) #.decode(encoding=ENCODING))
     # native encoding segfaults
-    # df[y] = df[y].apply(lambda e: e.to_bytes().decode(encoding=ENCODING))
-
+    # df[y] = df[y].apply(lambda e: e.to_bytes().decode(encoding=ENCODING)
   return df
 
-def deserialise(he, df):
-
+def deserialise(he, df_in):
+  df = df_in.copy()
   def deser(b):
     c = PyCtxt(pyfhel=he)
     # base64 encoding
