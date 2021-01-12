@@ -2,6 +2,7 @@
 
 Homomorphic encryption permits mathematical operations to be executed directly on encrypted data, yielding an encrypted result that, when decrypted, is the same as you would get on the unencrypted input.
 
+This means that, for example, you can securely store encrypted data on a server and perform queries on it without ever having to worry about server-side encryption keys being compromised - they simply aren't there. The recipient of the data
 
 ## Simple test
 
@@ -11,11 +12,11 @@ python test_df.py
 
 ## Client-server demo
 
-For the purposes of the demonstration we have server thats stores encrpyed data and can aggregate (i.e. perform addition) *without requiring decryption*.
+For the purposes of the demonstration we create a server that stores encrypted data and will aggregate it (i.e. perform addition)  on request *without requiring decryption*.
 
-The server permits a single encrypted dataset to be uploaded along with a public key and a context.
+The server permits a single encrypted dataset to be uploaded (along with a corresponding public key and a encryption parameters, **but not** the private key that would permit decryption).
 
-Then, the data can be downloaded directly, aggregrated, or deleted entirely.
+Then, the encrypted data can be downloaded directly, aggregrated, or deleted entirely. Only the client can actually decrypt the data.
 
 The client script does the following:
 
@@ -117,6 +118,11 @@ b"invalid or missing aggregation parameter: INVALID. must be one of ['AREA', 'AG
 delete encrypted data on server:
 check encrypted data no longer on server:
 ```
+
+## Caveats
+
+- Each (numeric) value is encrypted individually, rather than the whole dataset. Non-numeric values are not encrypted.
+- The encrypted (serialised) data is *much* larger than the original: 32MB vs 8.1kB.
 
 ## Resources
 

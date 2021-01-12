@@ -1,5 +1,6 @@
 
 import pandas as pd
+import numpy as np
 from Pyfhel import Pyfhel, PyPtxt, PyCtxt
 from base64 import b64encode, b64decode
 from time import time
@@ -12,12 +13,14 @@ client_he.keyGen()             # Key Generation: generates a pair of public/secr
 print(client_he)
 
 df = pd.read_csv("./client/snpp-2018-sample.csv").set_index(["AREA", "AGE GROUP", "SEX"])
+df["2018"] = df["2018"].astype(float)
 print("unencrypted, unmodified")
 print(len(df))
 print(df.head())
 
 print("unencrypted, aggregated")
-print(df.groupby(level=["AREA", "SEX"]).sum())
+check = df.groupby(level=["AREA", "SEX"]).sum()
+print(check)
 
 
 start = time()
@@ -72,6 +75,11 @@ elapsed = time() - start
 print("decrypting aggregation took %fs" % elapsed)
 print("copied, decrypted, deserialised, aggregrated")
 print(dfagg)
+
+# for y - dfagg.columns:
+#   print(check["2018"] - dfagg["2018"])
+assert np.allclose(dfagg, check)
+print("check ok")
 
 
 # print("copied, decrypted, deserialised, modified")

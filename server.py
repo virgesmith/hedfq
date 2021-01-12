@@ -61,17 +61,15 @@ def aggregate():
 
   agg_param = request.args.get("on")
 
-  cols = ["AREA", "AGE GROUP", "SEX"]
-
-  if agg_param not in cols:
-    return "invalid or missing aggregation parameter: %s. must be one of %s" % (agg_param, cols), 400
+  if agg_param not in dataset.index.names:
+    return "invalid or missing aggregation parameter: %s. must be one of %s" % (agg_param, dataset.index.names), 400
 
   if server_he is None or dataset is None:
     return "no encrypted data registered", 400
 
   # Note NO decryption!
   result = deserialise(server_he, dataset)
-  cols = [c for c in cols if c != agg_param]
+  cols = [c for c in dataset.index.names if c != agg_param]
   result = result.groupby(level=cols).sum()
   result = serialise(result)
 
