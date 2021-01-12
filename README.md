@@ -130,4 +130,4 @@ https://en.wikipedia.org/wiki/Homomorphic_encryption
 
 https://pyfhel.readthedocs.io/en/latest/
 
-https://blog.openmined.org/build-an-homomorphic-encryption-scclient_heme-from-scratch-with-python/
+https://blog.openmined.org/build-an-homomorphic-encryption-scheme-from-scratch-with-python/
